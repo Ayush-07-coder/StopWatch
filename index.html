@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <link rel="icon" type="image/x-icon" href="download.jpg">
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: black;
+        color: white;
+        font-family : monospace;
+    }
+    .hour, .minute, .second, .mili{
+        font-size: 150px;
+    }
+    .hr, .min, .sec{
+        font-size: 50px;
+        font-weight: 400;
+    }
+    .controller{
+        display: flex;
+        justify-content: center;
+    }
+    .btn{
+        padding: 10px 28px;
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        font-style: italic;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: .5s;
+    }
+    #btn1{
+        background-color: #3cb371;
+    }
+    #btn2{
+        background-color: #1E90FF;
+    }
+    #btn3{
+        background-color: #ff6347;
+    }
+    #btn3:hover{
+        opacity: .7;
+        /* background-color: black;
+        color: #ff6347; */
+        transform: translateX(0px) translateY(5px);
+    }
+    #btn2:hover{
+        opacity: .7;
+        /* background-color: black;
+        color: #1E90FF; */
+        transform: translateX(0px) translateY(5px);
+    }
+    #btn1:hover{
+        opacity: .7;
+        /* background-color: black;
+        color: #3cb371; */
+        transform: translateX(0px) translateY(5px);
+    }
+</style>
+<body>
+    <div class="conatiner">
+        <div class="sub_con">
+            <spna class="hour">00</spna>
+            <span class="hr">Hr</span>
+            <span class="minute">00</span>
+            <span class="min">Min</span>
+            <span class="second">00</span>
+            <span class="sec">Sec</span>
+            <span class="mili">00</span><br><br>
+            <div class="controller">
+                <button class="btn" id="btn1" onclick="start();">Start</button>
+                <button class="btn" id="btn2" onclick="stop();">Stop</button>
+                <button class="btn" id="btn3" onclick="reset();">Reset</button>
+            </div>
+        </div>
+    </div>
+<script>
+    let count = 0;
+    let sec = 0;
+    let min = 0;
+    let hor = 0;
+    let timer = false;
+    function start(){
+        timer = true;
+        demo();
+    } 
+    function stop(){
+        timer = false;
+    }
+    function reset(){
+        timer = false;
+         count = 0;
+         sec = 0;
+         min = 0;
+         hor = 0;
+         document.querySelector('.hour').innerHTML = "00";
+         document.querySelector('.minute').innerHTML = "00";
+         document.querySelector('.mili').innerHTML = "00";
+         document.querySelector('.second').innerHTML = "00";
+
+    }
+    function demo(){
+        if(timer == true){
+            count = count+1;
+            console.log(count);
+            if(count == 100){
+                sec = sec+1;
+                count = 0; 
+            }
+            if(sec == 60){
+                min = min+1;
+                sec = 0;
+            }
+            if(min == 60 ){
+                hor = hor+1;
+                min = 0;
+            }
+            let horst = hor;
+            let minst = min;
+            let secst = sec;
+            let countst = count;
+            if(hor < 10){
+                horst = "0"+horst;
+            } 
+            if(min < 10){
+                minst = "0"+minst;
+            } 
+            if(sec < 10){
+                secst = "0"+secst;
+            }
+            if(count < 10){
+                countst = "0"+countst;
+            } 
+            
+            document.querySelector('.hour').innerHTML = horst;
+            document.querySelector('.minute').innerHTML = minst;
+            document.querySelector('.mili').innerHTML = countst;
+            document.querySelector('.second').innerHTML = secst;
+            setTimeout("demo()",10);
+        }
+    }
+</script>
+</body>
+</html>
